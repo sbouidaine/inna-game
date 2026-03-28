@@ -29,83 +29,117 @@ const MISSION_BANK = [
     { title: "ملف الواجب", text: "حل التحدي لتفتح السؤال التالي." }
 ];
 
-const NAME_BANK = [
-    { acc: "الطالبَ", bare: "الطالب" },
-    { acc: "الطالبةَ", bare: "الطالبة" },
-    { acc: "الفريقَ", bare: "الفريق" },
-    { acc: "الصفَّ", bare: "الصف" },
-    { acc: "المعلمَ", bare: "المعلم" },
-    { acc: "المعلمةَ", bare: "المعلمة" },
-    { acc: "المختبرَ", bare: "المختبر" },
-    { acc: "المكتبةَ", bare: "المكتبة" },
-    { acc: "الإذاعةَ", bare: "الإذاعة" },
-    { acc: "القاعةَ", bare: "القاعة" },
-    { acc: "المشروعَ", bare: "المشروع" },
-    { acc: "العرضَ", bare: "العرض" },
-    { acc: "البرنامجَ", bare: "البرنامج" },
-    { acc: "التمرينَ", bare: "التمرين" },
-    { acc: "النشاطَ", bare: "النشاط" },
-    { acc: "الدرسَ", bare: "الدرس" },
-    { acc: "التقريرَ", bare: "التقرير" },
-    { acc: "الشرحَ", bare: "الشرح" },
-    { acc: "المسابقةَ", bare: "المسابقة" },
-    { acc: "الإنجازَ", bare: "الإنجاز" },
-    { acc: "الطالِبَيْنِ", bare: "الطالبين" },
-    { acc: "المدرسةَ", bare: "المدرسة" }
+const STATEMENT_BANK = [
+    { acc: "الطالبَ", bare: "الطالب", khabarNom: "مجتهدٌ", khabarBare: "مجتهد" },
+    { acc: "الطالبةَ", bare: "الطالبة", khabarNom: "قدوةٌ في الانضباط", khabarBare: "قدوة" },
+    { acc: "الفريقَ", bare: "الفريق", khabarNom: "نموذجٌ في التعاون", khabarBare: "نموذج" },
+    { acc: "الصفَّ", bare: "الصف", khabarNom: "مساحةُ تعلمٍ", khabarBare: "مساحة" },
+    { acc: "المعلمَ", bare: "المعلم", khabarNom: "قدوةٌ في العطاء", khabarBare: "قدوة" },
+    { acc: "المعلمةَ", bare: "المعلمة", khabarNom: "مصدرُ إلهامٍ", khabarBare: "مصدر" },
+    { acc: "المختبرَ", bare: "المختبر", khabarNom: "بيئةُ اكتشافٍ", khabarBare: "بيئة" },
+    { acc: "المكتبةَ", bare: "المكتبة", khabarNom: "ركنُ معرفةٍ", khabarBare: "ركن" },
+    { acc: "الإذاعةَ المدرسيةَ", bare: "الإذاعة المدرسية", khabarNom: "منبرُ توعيةٍ", khabarBare: "منبر" },
+    { acc: "القاعةَ", bare: "القاعة", khabarNom: "مكانٌ مناسبٌ للتعلم", khabarBare: "مكان" },
+    { acc: "المشروعَ", bare: "المشروع", khabarNom: "خطوةٌ مهمةٌ للابتكار", khabarBare: "خطوة" },
+    { acc: "العرضَ", bare: "العرض", khabarNom: "عملٌ منظمٌ", khabarBare: "عمل" },
+    { acc: "البرنامجَ", bare: "البرنامج", khabarNom: "خطةٌ واضحةٌ", khabarBare: "خطة" },
+    { acc: "التمرينَ", bare: "التمرين", khabarNom: "مفتاحُ الإتقان", khabarBare: "مفتاح" },
+    { acc: "النشاطَ", bare: "النشاط", khabarNom: "وسيلةٌ لتنمية المهارات", khabarBare: "وسيلة" },
+    { acc: "الدرسَ", bare: "الدرس", khabarNom: "أساسُ الفهم", khabarBare: "أساس" },
+    { acc: "التقريرَ", bare: "التقرير", khabarNom: "وثيقةٌ دقيقةٌ", khabarBare: "وثيقة" },
+    { acc: "الشرحَ", bare: "الشرح", khabarNom: "طريقٌ للفهم", khabarBare: "طريق" },
+    { acc: "المسابقةَ", bare: "المسابقة", khabarNom: "فرصةٌ للتطور", khabarBare: "فرصة" },
+    { acc: "الإنجازَ", bare: "الإنجاز", khabarNom: "ثمرةُ اجتهادٍ", khabarBare: "ثمرة" },
+    { acc: "المدرسةَ", bare: "المدرسة", khabarNom: "بيئةٌ آمنةٌ للتعلم", khabarBare: "بيئة" }
 ];
 
-const PREDICATE_BANK = [
-    { nom: "ممتازٌ", bare: "ممتاز" },
-    { nom: "منظمٌ", bare: "منظم" },
-    { nom: "واضحٌ", bare: "واضح" },
-    { nom: "جاهزٌ", bare: "جاهز" },
-    { nom: "متعاونٌ", bare: "متعاون" },
-    { nom: "مبدعٌ", bare: "مبدع" },
-    { nom: "متميزٌ", bare: "متميز" },
-    { nom: "قويٌ", bare: "قوي" },
-    { nom: "حاضرٌ", bare: "حاضر" },
-    { nom: "دقيقٌ", bare: "دقيق" },
-    { nom: "مفيدٌ", bare: "مفيد" },
-    { nom: "نشيطٌ", bare: "نشيط" },
-    { nom: "متقنٌ", bare: "متقن" },
-    { nom: "ملهمٌ", bare: "ملهم" },
-    { nom: "مرتبٌ", bare: "مرتب" },
-    { nom: "مفهومٌ", bare: "مفهوم" }
+const WISH_BANK = [
+    { acc: "الحصةَ", bare: "الحصة", khabarNom: "أطولُ قليلًا", khabarBare: "أطول" },
+    { acc: "الشرحَ", bare: "الشرح", khabarNom: "أوضحُ للجميع", khabarBare: "أوضح" },
+    { acc: "الواجبَ", bare: "الواجب", khabarNom: "أخفُّ هذا الأسبوع", khabarBare: "أخف" },
+    { acc: "وقتَ المراجعةِ", bare: "وقت المراجعة", khabarNom: "أوسعُ", khabarBare: "أوسع" },
+    { acc: "المختبرَ", bare: "المختبر", khabarNom: "متاحٌ بعد الدوام", khabarBare: "متاح" },
+    { acc: "المكتبةَ", bare: "المكتبة", khabarNom: "مفتوحةٌ حتى العصر", khabarBare: "مفتوحة" },
+    { acc: "الصفَّ", bare: "الصف", khabarNom: "أهدأُ أثناء الشرح", khabarBare: "أهدأ" },
+    { acc: "البرنامجَ", bare: "البرنامج", khabarNom: "أبسطُ للطلاب الجدد", khabarBare: "أبسط" },
+    { acc: "النشاطَ", bare: "النشاط", khabarNom: "أكثرُ تفاعلًا", khabarBare: "أكثر" },
+    { acc: "المسابقةَ", bare: "المسابقة", khabarNom: "أقربُ إلى واقع المنهج", khabarBare: "أقرب" },
+    { acc: "نتائجَ الاختبارِ", bare: "نتائج الاختبار", khabarNom: "أفضلُ هذا الفصل", khabarBare: "أفضل" },
+    { acc: "القاعةَ", bare: "القاعة", khabarNom: "أوسعُ للأنشطة", khabarBare: "أوسع" },
+    { acc: "جدولَ الاختباراتِ", bare: "جدول الاختبارات", khabarNom: "أكثرُ توازنًا", khabarBare: "أكثر" },
+    { acc: "المقاعدَ", bare: "المقاعد", khabarNom: "أريحُ للطلاب", khabarBare: "أريح" },
+    { acc: "الرحلةَ العلميةَ", bare: "الرحلة العلمية", khabarNom: "أقربُ موعدًا", khabarBare: "أقرب" },
+    { acc: "الأنشطةَ الفنيةَ", bare: "الأنشطة الفنية", khabarNom: "أكثرُ حضورًا", khabarBare: "أكثر" },
+    { acc: "جلسةَ النقاشِ", bare: "جلسة النقاش", khabarNom: "أطولُ", khabarBare: "أطول" },
+    { acc: "الخطةَ الدراسيةَ", bare: "الخطة الدراسية", khabarNom: "أوضحُ للطلاب", khabarBare: "أوضح" }
 ];
 
-const SIMILE_BANK = [
-    { nom: "نجمٌ", bare: "نجم" },
-    { nom: "لوحةٌ", bare: "لوحة" },
-    { nom: "خليةُ نحلٍ", bare: "خلية" },
-    { nom: "شعلةُ نشاطٍ", bare: "شعلة" },
-    { nom: "قدوةٌ", bare: "قدوة" },
-    { nom: "رسالةُ أملٍ", bare: "رسالة" },
-    { nom: "جسرٌ", bare: "جسر" },
-    { nom: "بوصلةٌ", bare: "بوصلة" }
+const HOPE_BANK = [
+    { acc: "الفريقَ", bare: "الفريق", khabarNom: "جاهزٌ للمسابقة", khabarBare: "جاهز" },
+    { acc: "الطلابَ", bare: "الطلاب", khabarNom: "ملتزمون بالخطة", khabarBare: "ملتزمون" },
+    { acc: "النتائجَ", bare: "النتائج", khabarNom: "مرضيةٌ", khabarBare: "مرضية" },
+    { acc: "المشروعَ", bare: "المشروع", khabarNom: "مكتملٌ", khabarBare: "مكتمل" },
+    { acc: "الطقسَ", bare: "الطقس", khabarNom: "مناسبٌ للرحلة", khabarBare: "مناسب" },
+    { acc: "الشرحَ", bare: "الشرح", khabarNom: "مفيدٌ للجميع", khabarBare: "مفيد" },
+    { acc: "القاعةَ", bare: "القاعة", khabarNom: "مهيأةٌ للعرض", khabarBare: "مهيأة" },
+    { acc: "الإذاعةَ المدرسيةَ", bare: "الإذاعة المدرسية", khabarNom: "مؤثرةٌ في الطلاب", khabarBare: "مؤثرة" },
+    { acc: "المختبرَ", bare: "المختبر", khabarNom: "آمنٌ للتجارب", khabarBare: "آمن" },
+    { acc: "الواجبَ", bare: "الواجب", khabarNom: "واضحٌ في التعليمات", khabarBare: "واضح" },
+    { acc: "التقريرَ", bare: "التقرير", khabarNom: "جاهزٌ للتسليم", khabarBare: "جاهز" },
+    { acc: "الطلابَ الجددَ", bare: "الطلاب الجدد", khabarNom: "مندمجون بسرعة", khabarBare: "مندمجون" },
+    { acc: "المعرضَ", bare: "المعرض", khabarNom: "منظمٌ", khabarBare: "منظم" },
+    { acc: "الخطةَ", bare: "الخطة", khabarNom: "قابلةٌ للتنفيذ", khabarBare: "قابلة" },
+    { acc: "البرنامجَ", bare: "البرنامج", khabarNom: "ملائمٌ لقدرات الطلاب", khabarBare: "ملائم" },
+    { acc: "الفصلَ", bare: "الفصل", khabarNom: "هادئٌ أثناء الشرح", khabarBare: "هادئ" },
+    { acc: "الأنشطةَ", bare: "الأنشطة", khabarNom: "متنوعةٌ", khabarBare: "متنوعة" },
+    { acc: "الحافلةَ", bare: "الحافلة", khabarNom: "ملتزمةٌ بالموعد", khabarBare: "ملتزمة" }
 ];
 
-const CERTAINTY_TAILS = ["حقًا", "بلا شك", "دائمًا", "هذا الأسبوع", "في هذا الفصل"];
-const WISH_TAILS = ["كل يوم", "في كل درس", "دائمًا", "دون انقطاع", "طوال الفصل"];
-const HOPE_TAILS = ["قريبًا", "في الحصة القادمة", "هذا الأسبوع", "غدًا", "قبل نهاية الشهر"];
+const SIMILE_SCENES = [
+    { acc: "الطالبَ", bare: "الطالب", simileNom: "نجمٌ في الاجتهاد", simileBare: "نجم" },
+    { acc: "الطالبةَ", bare: "الطالبة", simileNom: "شعلةُ نشاطٍ", simileBare: "شعلة" },
+    { acc: "الفريقَ", bare: "الفريق", simileNom: "خليةُ نحلٍ", simileBare: "خلية" },
+    { acc: "المعلمَ", bare: "المعلم", simileNom: "قائدٌ حكيمٌ", simileBare: "قائد" },
+    { acc: "المعلمةَ", bare: "المعلمة", simileNom: "بوصلةُ نجاحٍ", simileBare: "بوصلة" },
+    { acc: "المختبرَ", bare: "المختبر", simileNom: "ورشةُ ابتكارٍ", simileBare: "ورشة" },
+    { acc: "المكتبةَ", bare: "المكتبة", simileNom: "كنزٌ معرفيٌ", simileBare: "كنز" },
+    { acc: "الإذاعةَ المدرسيةَ", bare: "الإذاعة المدرسية", simileNom: "صوتُ المدرسة", simileBare: "صوت" },
+    { acc: "القاعةَ", bare: "القاعة", simileNom: "خليةُ تعلمٍ", simileBare: "خلية" },
+    { acc: "البرنامجَ", bare: "البرنامج", simileNom: "خريطةُ طريقٍ", simileBare: "خريطة" },
+    { acc: "المشروعَ", bare: "المشروع", simileNom: "جسرٌ للمستقبل", simileBare: "جسر" },
+    { acc: "العرضَ", bare: "العرض", simileNom: "لوحةٌ فنيةٌ", simileBare: "لوحة" },
+    { acc: "النشاطَ", bare: "النشاط", simileNom: "محركُ حماسٍ", simileBare: "محرك" },
+    { acc: "الدرسَ", bare: "الدرس", simileNom: "مفتاحُ فهمٍ", simileBare: "مفتاح" },
+    { acc: "المسابقةَ", bare: "المسابقة", simileNom: "ميدانُ تميزٍ", simileBare: "ميدان" }
+];
+
+const CERTAINTY_TAILS = ["حقًا", "بلا شك", "فعلًا", "بصورة واضحة", "في هذا الفصل"];
+const WISH_TAILS = ["في هذا الفصل", "خلال الفترة القادمة", "قبل الاختبارات", "عند بداية الفصل القادم", "بشكل مستمر"];
+const HOPE_TAILS = ["هذا الأسبوع", "قريبًا", "في الفترة القادمة", "خلال هذا الفصل", "في الأيام المقبلة"];
 const CONTRAST_PREFIXES = [
-    "الوقت ضيق،",
-    "التحدي صعب،",
-    "الفصل مزدحم،",
-    "المادة طويلة،",
-    "الموعد قريب،",
-    "العمل كثير،"
+    "المهمة صعبة،",
+    "الوقت محدود،",
+    "الطريق ليس سهلًا،",
+    "التحدي كبير،",
+    "المنهج كثيف،",
+    "الاستعداد يحتاج جهدًا،"
 ];
 const AN_STARTERS = [
     "يسرني",
     "يسعدنا",
-    "أحب",
-    "نريد",
-    "أتمنى",
-    "يهمني",
+    "من الرائع",
+    "من الجميل",
+    "من المهم",
     "لاحظت",
     "أؤكد",
-    "يعجبني",
-    "أرغب"
+    "يسر المعلم"
+];
+const SIMILE_TAILS = [
+    "وقت الحصة",
+    "أثناء النشاط",
+    "في يوم العرض",
+    "عند العمل الجماعي",
+    "في أجواء المسابقة"
 ];
 
 function hashString(value) {
@@ -178,33 +212,53 @@ function buildToolOptions(correctTool, rng) {
     return shuffle([correctTool, ...shuffle(others, rng).slice(0, 3)], rng);
 }
 
-function buildSentence(tool, name, predicate, rng) {
+function buildSentence(tool, rng) {
     let prompt;
-    let parseKhabar = predicate;
+    let parseKhabar;
+    let subject;
 
     if (tool === "إن") {
+        const statement = pickRandom(STATEMENT_BANK, rng);
         const tail = pickRandom(CERTAINTY_TAILS, rng);
-        prompt = `____ ${name.acc} ${predicate.nom} ${tail}.`;
+        prompt = `____ ${statement.acc} ${statement.khabarNom} ${tail}.`;
+        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
+        subject = { acc: statement.acc, bare: statement.bare };
     } else if (tool === "أن") {
+        const statement = pickRandom(STATEMENT_BANK, rng);
         const starter = pickRandom(AN_STARTERS, rng);
-        prompt = `${starter} ____ ${name.acc} ${predicate.nom}.`;
+        prompt = `${starter} ____ ${statement.acc} ${statement.khabarNom}.`;
+        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
+        subject = { acc: statement.acc, bare: statement.bare };
     } else if (tool === "كأن") {
-        parseKhabar = pickRandom(SIMILE_BANK, rng);
-        prompt = `____ ${name.acc} ${parseKhabar.nom} في ساحة المدرسة.`;
+        const simile = pickRandom(SIMILE_SCENES, rng);
+        const tail = pickRandom(SIMILE_TAILS, rng);
+        prompt = `____ ${simile.acc} ${simile.simileNom} ${tail}.`;
+        parseKhabar = { nom: simile.simileNom, bare: simile.simileBare };
+        subject = { acc: simile.acc, bare: simile.bare };
     } else if (tool === "لكن") {
+        const statement = pickRandom(STATEMENT_BANK, rng);
         const prefix = pickRandom(CONTRAST_PREFIXES, rng);
-        prompt = `${prefix} ____ ${name.acc} ${predicate.nom}.`;
+        prompt = `${prefix} ____ ${statement.acc} ${statement.khabarNom}.`;
+        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
+        subject = { acc: statement.acc, bare: statement.bare };
     } else if (tool === "ليت") {
+        const statement = pickRandom(WISH_BANK, rng);
         const tail = pickRandom(WISH_TAILS, rng);
-        prompt = `____ ${name.acc} ${predicate.nom} ${tail}.`;
+        prompt = `____ ${statement.acc} ${statement.khabarNom} ${tail}.`;
+        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
+        subject = { acc: statement.acc, bare: statement.bare };
     } else {
+        const statement = pickRandom(HOPE_BANK, rng);
         const tail = pickRandom(HOPE_TAILS, rng);
-        prompt = `____ ${name.acc} ${predicate.nom} ${tail}.`;
+        prompt = `____ ${statement.acc} ${statement.khabarNom} ${tail}.`;
+        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
+        subject = { acc: statement.acc, bare: statement.bare };
     }
 
     return {
         prompt,
-        parseKhabar
+        parseKhabar,
+        subject
     };
 }
 
@@ -245,18 +299,13 @@ function buildParseQuestion(tool, sentenceWithBlank, name, khabar, rng) {
     };
 }
 
-function generateChallengePool(count, rng) {
-    const pool = [];
-    const seen = new Set();
+function buildSingleChallenge(tool, rng, seen, maxAttempts = 120) {
     let attempts = 0;
 
-    while (pool.length < count && attempts < count * 30) {
+    while (attempts < maxAttempts) {
         attempts += 1;
-        const tool = pickRandom(TOOL_POOL, rng);
         const mission = pickRandom(MISSION_BANK, rng);
-        const name = pickRandom(NAME_BANK, rng);
-        const predicate = pickRandom(PREDICATE_BANK, rng);
-        const sentence = buildSentence(tool, name, predicate, rng);
+        const sentence = buildSentence(tool, rng);
 
         const toolQuestion = {
             prompt: sentence.prompt,
@@ -265,23 +314,57 @@ function generateChallengePool(count, rng) {
             explain: TOOL_EXPLAIN[tool]
         };
 
-        const parseQuestion = buildParseQuestion(tool, sentence.prompt, name, sentence.parseKhabar, rng);
-
+        const parseQuestion = buildParseQuestion(tool, sentence.prompt, sentence.subject, sentence.parseKhabar, rng);
         const key = `${toolQuestion.prompt}|${parseQuestion.prompt}`;
+
         if (seen.has(key)) {
             continue;
         }
 
         seen.add(key);
-        pool.push({
+        return {
             missionTitle: mission.title,
             missionText: mission.text,
             toolQuestion,
             parseQuestion
-        });
+        };
     }
 
-    return pool;
+    return null;
+}
+
+function generateChallengePool(count, rng) {
+    const pool = [];
+    const seen = new Set();
+
+    const basePerTool = Math.floor(count / TOOL_POOL.length);
+    const remainder = count % TOOL_POOL.length;
+    const remainderOrder = shuffle([...TOOL_POOL], rng);
+    const quotas = TOOL_POOL.map((tool) => ({
+        tool,
+        quota: basePerTool + (remainderOrder.slice(0, remainder).includes(tool) ? 1 : 0)
+    }));
+
+    quotas.forEach(({ tool, quota }) => {
+        for (let i = 0; i < quota; i += 1) {
+            const challenge = buildSingleChallenge(tool, rng, seen);
+            if (challenge) {
+                pool.push(challenge);
+            }
+        }
+    });
+
+    let safetyAttempts = 0;
+    while (pool.length < count && safetyAttempts < count * 40) {
+        safetyAttempts += 1;
+        const tool = pickRandom(TOOL_POOL, rng);
+        const challenge = buildSingleChallenge(tool, rng, seen, 30);
+        if (challenge) {
+            pool.push(challenge);
+        }
+    }
+
+    return shuffle(pool, rng);
 }
 
 const CHALLENGES = generateChallengePool(GENERATED_CHALLENGE_COUNT, userRng);
@@ -329,9 +412,45 @@ const el = {
     finalNote: document.getElementById("finalNote")
 };
 
+function buildDiverseChallengeOrder(rng) {
+    const buckets = {};
+
+    TOOL_POOL.forEach((tool) => {
+        buckets[tool] = [];
+    });
+
+    CHALLENGES.forEach((challenge, index) => {
+        const tool = challenge.toolQuestion.correct;
+        if (!buckets[tool]) {
+            buckets[tool] = [];
+        }
+        buckets[tool].push(index);
+    });
+
+    TOOL_POOL.forEach((tool) => {
+        buckets[tool] = shuffle(buckets[tool], rng);
+    });
+
+    const toolOrder = shuffle([...TOOL_POOL], rng);
+    const order = [];
+    let hasRemaining = true;
+
+    while (hasRemaining) {
+        hasRemaining = false;
+        toolOrder.forEach((tool) => {
+            const bucket = buckets[tool];
+            if (bucket && bucket.length > 0) {
+                order.push(bucket.pop());
+                hasRemaining = true;
+            }
+        });
+    }
+
+    return order;
+}
+
 function resetChallengeOrder() {
-    const indices = CHALLENGES.map((_, index) => index);
-    state.challengeOrder = shuffle(indices, userRng);
+    state.challengeOrder = buildDiverseChallengeOrder(userRng);
     state.challengeCursor = 0;
 }
 
