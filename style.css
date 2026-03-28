@@ -282,6 +282,40 @@ h1 {
     margin: 0.5rem 0 0;
 }
 
+.signature {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 16px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.76), rgba(214, 239, 230, 0.58));
+    border: 1px solid rgba(20, 52, 43, 0.12);
+    box-shadow: 0 10px 24px rgba(20, 52, 43, 0.1);
+    color: var(--ink-soft);
+}
+
+.signature-text {
+    font-weight: 600;
+}
+
+.signature-name {
+    font-family: "Pacifico", cursive;
+    font-size: clamp(1.35rem, 4.2vw, 1.9rem);
+    line-height: 1;
+    letter-spacing: 0.4px;
+    background: linear-gradient(135deg, #ef6a3b, #2e8b77 62%, #f2b134);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: signGlow 2.6s ease-in-out infinite;
+}
+
+.signature-emoji {
+    font-size: 1.1rem;
+}
+
 .confetti {
     position: fixed;
     top: -10px;
@@ -322,6 +356,18 @@ h1 {
     }
 }
 
+@keyframes signGlow {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-1deg);
+        filter: drop-shadow(0 0 0 rgba(239, 106, 59, 0));
+    }
+    50% {
+        transform: translateY(-1px) rotate(1deg);
+        filter: drop-shadow(0 2px 6px rgba(46, 139, 119, 0.26));
+    }
+}
+
 @media (max-width: 720px) {
     .app-shell {
         width: min(720px, 96vw);
@@ -344,6 +390,12 @@ h1 {
 
     .option-btn {
         min-height: 50px;
+    }
+
+    .signature {
+        flex-wrap: wrap;
+        text-align: center;
+        gap: 0.25rem 0.4rem;
     }
 }
 
