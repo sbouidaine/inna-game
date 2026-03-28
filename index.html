@@ -23,6 +23,15 @@
                 <button id="startBtn" class="btn btn-primary">ابدأ التحدي</button>
                 <button id="howBtn" class="btn btn-ghost" aria-expanded="false" aria-controls="howPanel">كيف ألعب؟</button>
             </div>
+
+            <section class="grade-preview" aria-labelledby="gradePreviewTitle">
+                <h2 id="gradePreviewTitle">الرتب المتوقعة: فوز أو خسارة</h2>
+                <p class="grade-preview-intro">
+                    قبل البدء، تعرّف على الرتبة التي ستحصل عليها حسب نتيجتك النهائية.
+                </p>
+                <div id="gradePreviewList" class="grade-preview-list" aria-live="polite"></div>
+            </section>
+
             <section id="howPanel" class="how-panel" hidden>
                 <ul>
                     <li>أجب عن سؤالين في كل جولة: اختيار الأداة + تحديد الإعراب.</li>
@@ -73,6 +82,18 @@
             <p id="finalScore">نتيجتك النهائية: 0</p>
             <p id="finalNote">أحسنت! جرّب مرة أخرى لكسر رقمك القياسي.</p>
             <button id="restartBtn" class="btn btn-primary">العب من جديد</button>
+        </section>
+
+        <section id="guideSection" class="grammar-guide" aria-labelledby="guideTitle" hidden>
+            <p class="guide-kicker">دليل تعليمي في نهاية الصفحة</p>
+            <h2 id="guideTitle">دليل إن وأخواتها: جملة + إعراب</h2>
+            <p class="guide-intro">
+                اختر أداة واحدة، وستظهر كل الجمل الخاصة بها مع إعراب مختصر وواضح.
+            </p>
+
+            <div id="guideTools" class="guide-tools" aria-label="اختيار الأداة"></div>
+            <p id="guideHint" class="guide-hint">اضغط على أداة لعرض جميع الجمل مع الإعراب.</p>
+            <div id="guideContent" class="guide-content" aria-live="polite"></div>
         </section>
 
         <footer class="signature" aria-label="توقيع المصممة">
