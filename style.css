@@ -90,6 +90,75 @@ h1 {
     flex-wrap: wrap;
 }
 
+.grade-preview {
+    margin-top: 1rem;
+    text-align: right;
+    border: 1px solid rgba(20, 52, 43, 0.12);
+    border-radius: 18px;
+    padding: 0.8rem;
+    background:
+        linear-gradient(130deg, rgba(46, 139, 119, 0.08), rgba(239, 106, 59, 0.08));
+}
+
+.grade-preview h2 {
+    margin: 0;
+    font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+}
+
+.grade-preview-intro {
+    margin: 0.35rem 0 0;
+    color: var(--ink-soft);
+}
+
+.grade-preview-list {
+    margin-top: 0.6rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+}
+
+.grade-tier-card {
+    background: #fff;
+    border: 1px solid rgba(20, 52, 43, 0.14);
+    border-radius: 14px;
+    padding: 0.62rem;
+    box-shadow: 0 8px 18px rgba(20, 52, 43, 0.08);
+}
+
+.grade-state {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
+.grade-state.win {
+    color: #fff;
+    background: linear-gradient(120deg, #1d9b61, #2e8b77);
+}
+
+.grade-state.lose {
+    color: #fff;
+    background: linear-gradient(120deg, #ce3f2f, #ef6a3b);
+}
+
+.grade-tier-card h3 {
+    margin: 0.42rem 0 0;
+    font-size: 1.14rem;
+}
+
+.grade-range,
+.grade-note {
+    margin: 0.35rem 0 0;
+    color: var(--ink-soft);
+}
+
+.grade-range {
+    font-weight: 700;
+    color: var(--ink);
+}
+
 .btn {
     border: 0;
     border-radius: 14px;
@@ -282,6 +351,147 @@ h1 {
     margin: 0.5rem 0 0;
 }
 
+.grammar-guide {
+    margin-top: 1rem;
+    padding: 1.2rem 1rem 1.1rem;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(239, 106, 59, 0.14), transparent 48%),
+        radial-gradient(circle at 0% 100%, rgba(46, 139, 119, 0.14), transparent 45%),
+        rgba(255, 255, 255, 0.84);
+    border: 1px solid var(--stroke);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(5px);
+    animation: rise 540ms ease-out both;
+}
+
+.guide-kicker {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--accent-2);
+    font-weight: 700;
+}
+
+.grammar-guide h2 {
+    margin-top: 0.25rem;
+    font-size: clamp(1.45rem, 4.3vw, 2.05rem);
+    line-height: 1.2;
+}
+
+.guide-intro {
+    margin: 0.55rem 0 0;
+    color: var(--ink-soft);
+    max-width: 760px;
+    line-height: 1.8;
+}
+
+.guide-tools {
+    margin-top: 0.95rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.guide-tool-btn {
+    border: 1px solid rgba(20, 52, 43, 0.24);
+    background: #fff;
+    color: var(--ink);
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 700;
+    padding: 0.45rem 0.8rem;
+    cursor: pointer;
+    transition: transform 140ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.guide-tool-btn:hover {
+    transform: translateY(-1px);
+    border-color: rgba(239, 106, 59, 0.7);
+    background: rgba(239, 106, 59, 0.08);
+}
+
+.guide-tool-btn.is-active {
+    color: #fff;
+    border-color: transparent;
+    background: linear-gradient(125deg, var(--accent), #d5542d 56%, #2e8b77);
+}
+
+.guide-hint {
+    margin: 0.75rem 0 0;
+    color: var(--ink-soft);
+    font-weight: 600;
+}
+
+.guide-content {
+    margin-top: 0.75rem;
+}
+
+.guide-overview {
+    border: 1px solid rgba(20, 52, 43, 0.14);
+    border-radius: 14px;
+    background: #fff;
+    padding: 0.7rem;
+}
+
+.guide-sentences {
+    margin-top: 0.7rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+.guide-sentence-card {
+    border: 1px solid rgba(20, 52, 43, 0.14);
+    border-radius: 16px;
+    background: #fff;
+    padding: 0.8rem;
+    box-shadow: 0 10px 22px rgba(20, 52, 43, 0.08);
+}
+
+.guide-sentence-card h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.tool-pill {
+    display: inline-block;
+    padding: 0.18rem 0.62rem;
+    border-radius: 999px;
+    color: #fff;
+    background: linear-gradient(95deg, var(--accent), #d5542d 55%, #2e8b77);
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.tool-meaning,
+.tool-example {
+    margin: 0.5rem 0 0;
+}
+
+.tool-meaning {
+    color: var(--ink-soft);
+    font-weight: 600;
+}
+
+.tool-example {
+    background: rgba(46, 139, 119, 0.08);
+    border: 1px dashed rgba(46, 139, 119, 0.3);
+    border-radius: 12px;
+    padding: 0.45rem 0.55rem;
+    font-size: 1.02rem;
+}
+
+.iirab-list {
+    margin: 0.62rem 0 0;
+    padding-inline-start: 1.05rem;
+    color: var(--ink-soft);
+}
+
+.iirab-list li {
+    margin: 0.22rem 0;
+    line-height: 1.6;
+}
+
 .signature {
     margin-top: 1rem;
     display: flex;
@@ -385,6 +595,14 @@ h1 {
     }
 
     .options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grade-preview-list {
+        grid-template-columns: 1fr;
+    }
+
+    .guide-sentences {
         grid-template-columns: 1fr;
     }
 
