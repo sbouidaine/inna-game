@@ -14,6 +14,24 @@ const TOOL_EXPLAIN = {
     "لعل": "لعل للرجاء أو التوقع."
 };
 
+const TOOL_DISPLAY = {
+    "إن": "إنَّ",
+    "أن": "أنَّ",
+    "كأن": "كأنَّ",
+    "لكن": "لكنَّ",
+    "ليت": "ليتَ",
+    "لعل": "لعلَّ"
+};
+
+const TOOL_IIRAB_PARTICLE = {
+    "إن": "حرف توكيد ونصب.",
+    "أن": "حرف توكيد ونصب.",
+    "كأن": "حرف تشبيه ونصب.",
+    "لكن": "حرف استدراك ونصب.",
+    "ليت": "حرف تمنٍّ ونصب.",
+    "لعل": "حرف رجاء ونصب."
+};
+
 const MISSION_BANK = [
     { title: "بيان الإدارة", text: "اختر الأداة الأدق لتعديل البيان الرسمي." },
     { title: "إذاعة الصباح", text: "صحح العبارة قبل البث المباشر." },
@@ -352,6 +370,7 @@ const state = {
     challengeOrder: [],
     challengeCursor: 0,
     stage: "tool",
+    selectedGuideTool: null,
     active: false,
     timerId: null
 };
@@ -360,6 +379,11 @@ const el = {
     hero: document.getElementById("hero"),
     game: document.getElementById("game"),
     resultPanel: document.getElementById("resultPanel"),
+    gradePreviewList: document.getElementById("gradePreviewList"),
+    guideSection: document.getElementById("guideSection"),
+    guideTools: document.getElementById("guideTools"),
+    guideHint: document.getElementById("guideHint"),
+    guideContent: document.getElementById("guideContent"),
     startBtn: document.getElementById("startBtn"),
     restartBtn: document.getElementById("restartBtn"),
     howBtn: document.getElementById("howBtn"),
@@ -378,6 +402,178 @@ const el = {
     finalScore: document.getElementById("finalScore"),
     finalNote: document.getElementById("finalNote")
 };
+
+function renderGradePreview() {
+    if (!el.gradePreviewList) {
+        return;
+    }
+
+    const sortedRanks = [...rankTable].sort((a, b) => a.min - b.min);
+    el.gradePreviewList.innerHTML = "";
+
+    sortedRanks.forEach((entry, index) => {
+        const nextEntry = sortedRanks[index + 1];
+        const max = nextEntry ? nextEntry.min - 1 : null;
+        const isWinTier = entry.min >= 400;
+
+        const card = document.createElement("article");
+        card.className = "grade-tier-card";
+
+        const stateBadge = document.createElement("span");
+        stateBadge.className = `grade-state ${isWinTier ? "win" : "lose"}`;
+        stateBadge.textContent = isWinTier ? "فوز" : "خسارة";
+
+        const rankName = document.createElement("h3");
+        rankName.textContent = entry.rank;
+
+        const scoreRange = document.createElement("p");
+        scoreRange.className = "grade-range";
+        scoreRange.textContent = max === null
+            ? `النتيجة: ${entry.min} نقطة فأكثر`
+            : `النتيجة: من ${entry.min} إلى ${max} نقطة`;
+
+        const note = document.createElement("p");
+        note.className = "grade-note";
+        note.textContent = entry.note;
+
+        card.appendChild(stateBadge);
+        card.appendChild(rankName);
+        card.appendChild(scoreRange);
+        card.appendChild(note);
+
+        el.gradePreviewList.appendChild(card);
+    });
+}
+
+const GUIDE_BY_TOOL = TOOL_POOL.reduce((grouped, tool) => {
+    grouped[tool] = CURATED_SENTENCE_BANK.filter((entry) => entry.tool === tool);
+    return grouped;
+}, {});
+
+function getToolLabel(tool) {
+    return TOOL_DISPLAY[tool] || tool;
+}
+
+function resetGuideSelection() {
+    state.selectedGuideTool = null;
+
+    if (!el.guideTools || !el.guideHint || !el.guideContent) {
+        return;
+    }
+
+    el.guideHint.textContent = "اضغط على أداة لعرض جميع الجمل مع الإعراب.";
+    el.guideContent.innerHTML = "";
+
+    const buttons = el.guideTools.querySelectorAll(".guide-tool-btn");
+    buttons.forEach((button) => {
+        button.classList.remove("is-active");
+        button.setAttribute("aria-pressed", "false");
+    });
+}
+
+function renderGuideContent(tool) {
+    if (!el.guideContent) {
+        return;
+    }
+
+    const entries = GUIDE_BY_TOOL[tool] || [];
+    const toolLabel = getToolLabel(tool);
+    const particleIirab = TOOL_IIRAB_PARTICLE[tool] || "حرف ناسخ.";
+
+    const overview = document.createElement("article");
+    overview.className = "guide-overview";
+
+    const overviewPill = document.createElement("span");
+    overviewPill.className = "tool-pill";
+    overviewPill.textContent = toolLabel;
+
+    const overviewText = document.createElement("p");
+    overviewText.className = "tool-meaning";
+    overviewText.textContent = `المعنى: ${TOOL_EXPLAIN[tool]} (${entries.length} جملة)`;
+
+    overview.appendChild(overviewPill);
+    overview.appendChild(overviewText);
+
+    const listWrap = document.createElement("div");
+    listWrap.className = "guide-sentences";
+
+    entries.forEach((entry, index) => {
+        const sentenceCard = document.createElement("article");
+        sentenceCard.className = "guide-sentence-card";
+
+        const sentenceTitle = document.createElement("h3");
+        sentenceTitle.textContent = `الجملة ${index + 1}`;
+
+        const solvedSentence = document.createElement("p");
+        solvedSentence.className = "tool-example";
+        solvedSentence.textContent = `الجملة: ${entry.prompt.replace("____", toolLabel)}`;
+
+        const parseList = document.createElement("ul");
+        parseList.className = "iirab-list";
+
+        const itemParticle = document.createElement("li");
+        itemParticle.textContent = `${toolLabel}: ${particleIirab}`;
+
+        const itemName = document.createElement("li");
+        itemName.textContent = `${entry.subjectBare}: اسم ${toolLabel} منصوب.`;
+
+        const itemKhabar = document.createElement("li");
+        itemKhabar.textContent = `${entry.khabarBare}: خبر ${toolLabel} مرفوع.`;
+
+        parseList.appendChild(itemParticle);
+        parseList.appendChild(itemName);
+        parseList.appendChild(itemKhabar);
+
+        sentenceCard.appendChild(sentenceTitle);
+        sentenceCard.appendChild(solvedSentence);
+        sentenceCard.appendChild(parseList);
+
+        listWrap.appendChild(sentenceCard);
+    });
+
+    el.guideContent.innerHTML = "";
+    el.guideContent.appendChild(overview);
+    el.guideContent.appendChild(listWrap);
+}
+
+function setGuideTool(tool) {
+    state.selectedGuideTool = tool;
+
+    if (!el.guideTools || !el.guideHint) {
+        return;
+    }
+
+    const buttons = el.guideTools.querySelectorAll(".guide-tool-btn");
+    buttons.forEach((button) => {
+        const isActive = button.dataset.tool === tool;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    el.guideHint.textContent = `تم اختيار ${getToolLabel(tool)}. تظهر الآن جميع الجمل مع الإعراب.`;
+    renderGuideContent(tool);
+}
+
+function initGuideTools() {
+    if (!el.guideTools) {
+        return;
+    }
+
+    el.guideTools.innerHTML = "";
+
+    TOOL_POOL.forEach((tool) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "guide-tool-btn";
+        button.dataset.tool = tool;
+        button.setAttribute("aria-pressed", "false");
+        button.textContent = `${getToolLabel(tool)} (${GUIDE_BY_TOOL[tool].length})`;
+        button.addEventListener("click", () => setGuideTool(tool));
+        el.guideTools.appendChild(button);
+    });
+
+    resetGuideSelection();
+}
 
 function buildDiverseChallengeOrder(rng) {
     const buckets = {};
@@ -551,6 +747,8 @@ function endGame() {
     const result = getRank(state.score);
     el.game.hidden = true;
     el.resultPanel.hidden = false;
+    el.guideSection.hidden = false;
+    resetGuideSelection();
 
     el.finalRank.textContent = `رتبتك: ${result.rank}`;
     el.finalScore.textContent = `نتيجتك النهائية: ${state.score}`;
@@ -581,7 +779,9 @@ function startGame() {
 
     el.hero.hidden = true;
     el.resultPanel.hidden = true;
+    el.guideSection.hidden = true;
     el.game.hidden = false;
+    resetGuideSelection();
 
     resetState();
     nextChallenge();
@@ -605,6 +805,9 @@ function toggleHelp() {
         el.howBtn.setAttribute("aria-expanded", "false");
     }
 }
+
+initGuideTools();
+renderGradePreview();
 
 el.startBtn.addEventListener("click", startGame);
 el.restartBtn.addEventListener("click", startGame);
