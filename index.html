@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي إن وأخواتها</title>
+    <meta name="description" content="لعبة تعليمية ممتعة لإتقان إن وأخواتها بطريقة تفاعلية.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;600;700;800&family=Changa:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="hero" id="hero">
+            <p class="hero-badge">لعبة نحوية تفاعلية</p>
+            <h1>تحدي إن وأخواتها</h1>
+            <p class="hero-subtitle">
+                أنقذ إعلانات المدرسة من الأخطاء النحوية قبل انتهاء الجرس.
+                اختر الأداة الصحيحة وحدد حكم الاسم والخبر لتحصد أعلى نتيجة.
+            </p>
+            <div class="hero-actions">
+                <button id="startBtn" class="btn btn-primary">ابدأ التحدي</button>
+                <button id="howBtn" class="btn btn-ghost" aria-expanded="false" aria-controls="howPanel">كيف ألعب؟</button>
+            </div>
+            <section id="howPanel" class="how-panel" hidden>
+                <ul>
+                    <li>أجب عن سؤالين في كل جولة: اختيار الأداة + تحديد الإعراب.</li>
+                    <li>كل إجابة صحيحة تزيد السلسلة وتضاعف النقاط.</li>
+                    <li>لديك ثلاث قلوب فقط، فلا تضيّعها.</li>
+                    <li>أكمل أكبر عدد من الجولات قبل انتهاء الوقت.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="game" id="game" hidden>
+            <section class="status-grid" aria-live="polite">
+                <article class="status-card">
+                    <span>النتيجة</span>
+                    <strong id="scoreValue">0</strong>
+                </article>
+                <article class="status-card">
+                    <span>السلسلة</span>
+                    <strong id="streakValue">0</strong>
+                </article>
+                <article class="status-card">
+                    <span>الوقت</span>
+                    <strong id="timeValue">90</strong>
+                </article>
+                <article class="status-card">
+                    <span>القلوب</span>
+                    <strong id="livesValue" class="hearts">❤❤❤</strong>
+                </article>
+            </section>
+
+            <section class="mission">
+                <p class="mission-label">المهمة الحالية</p>
+                <h2 id="missionTitle">استعد...</h2>
+                <p id="missionText">سيظهر السؤال بعد البدء مباشرة.</p>
+            </section>
+
+            <section class="question-card" id="questionCard">
+                <p class="question-type" id="questionType">نوع السؤال</p>
+                <h3 id="questionText">...</h3>
+                <div id="optionsArea" class="options-grid"></div>
+                <p id="feedback" class="feedback" aria-live="polite"></p>
+            </section>
+        </main>
+
+        <section id="resultPanel" class="result-panel" hidden>
+            <h2>انتهت المهمة</h2>
+            <p id="finalRank">رتبتك: ...</p>
+            <p id="finalScore">نتيجتك النهائية: 0</p>
+            <p id="finalNote">أحسنت! جرّب مرة أخرى لكسر رقمك القياسي.</p>
+            <button id="restartBtn" class="btn btn-primary">العب من جديد</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
