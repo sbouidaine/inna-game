@@ -1,13 +1,13 @@
 const TOTAL_TIME = 90;
 const INITIAL_LIVES = 3;
-const GENERATED_CHALLENGE_COUNT = 320;
-const USER_SEED_KEY = "innaSistersUserSeedV1";
+const GENERATED_CHALLENGE_COUNT = 90;
+const LAST_SELECTION_KEY = "innaLastSelectionSignatureV2";
 
 const TOOL_POOL = ["إن", "أن", "كأن", "لكن", "ليت", "لعل"];
 
 const TOOL_EXPLAIN = {
     "إن": "إن تفيد التوكيد.",
-    "أن": "أن تأتي غالبًا بعد أفعال مثل أحب ويسرني.",
+    "أن": "أن تأتي غالبًا بعد أفعال مثل يسرني وأؤكد.",
     "كأن": "كأن تفيد التشبيه.",
     "لكن": "لكن تفيد الاستدراك بعد معنى سابق.",
     "ليت": "ليت للتمني.",
@@ -29,117 +29,120 @@ const MISSION_BANK = [
     { title: "ملف الواجب", text: "حل التحدي لتفتح السؤال التالي." }
 ];
 
-const STATEMENT_BANK = [
-    { acc: "الطالبَ", bare: "الطالب", khabarNom: "مجتهدٌ", khabarBare: "مجتهد" },
-    { acc: "الطالبةَ", bare: "الطالبة", khabarNom: "قدوةٌ في الانضباط", khabarBare: "قدوة" },
-    { acc: "الفريقَ", bare: "الفريق", khabarNom: "نموذجٌ في التعاون", khabarBare: "نموذج" },
-    { acc: "الصفَّ", bare: "الصف", khabarNom: "مساحةُ تعلمٍ", khabarBare: "مساحة" },
-    { acc: "المعلمَ", bare: "المعلم", khabarNom: "قدوةٌ في العطاء", khabarBare: "قدوة" },
-    { acc: "المعلمةَ", bare: "المعلمة", khabarNom: "مصدرُ إلهامٍ", khabarBare: "مصدر" },
-    { acc: "المختبرَ", bare: "المختبر", khabarNom: "بيئةُ اكتشافٍ", khabarBare: "بيئة" },
-    { acc: "المكتبةَ", bare: "المكتبة", khabarNom: "ركنُ معرفةٍ", khabarBare: "ركن" },
-    { acc: "الإذاعةَ المدرسيةَ", bare: "الإذاعة المدرسية", khabarNom: "منبرُ توعيةٍ", khabarBare: "منبر" },
-    { acc: "القاعةَ", bare: "القاعة", khabarNom: "مكانٌ مناسبٌ للتعلم", khabarBare: "مكان" },
-    { acc: "المشروعَ", bare: "المشروع", khabarNom: "خطوةٌ مهمةٌ للابتكار", khabarBare: "خطوة" },
-    { acc: "العرضَ", bare: "العرض", khabarNom: "عملٌ منظمٌ", khabarBare: "عمل" },
-    { acc: "البرنامجَ", bare: "البرنامج", khabarNom: "خطةٌ واضحةٌ", khabarBare: "خطة" },
-    { acc: "التمرينَ", bare: "التمرين", khabarNom: "مفتاحُ الإتقان", khabarBare: "مفتاح" },
-    { acc: "النشاطَ", bare: "النشاط", khabarNom: "وسيلةٌ لتنمية المهارات", khabarBare: "وسيلة" },
-    { acc: "الدرسَ", bare: "الدرس", khabarNom: "أساسُ الفهم", khabarBare: "أساس" },
-    { acc: "التقريرَ", bare: "التقرير", khabarNom: "وثيقةٌ دقيقةٌ", khabarBare: "وثيقة" },
-    { acc: "الشرحَ", bare: "الشرح", khabarNom: "طريقٌ للفهم", khabarBare: "طريق" },
-    { acc: "المسابقةَ", bare: "المسابقة", khabarNom: "فرصةٌ للتطور", khabarBare: "فرصة" },
-    { acc: "الإنجازَ", bare: "الإنجاز", khabarNom: "ثمرةُ اجتهادٍ", khabarBare: "ثمرة" },
-    { acc: "المدرسةَ", bare: "المدرسة", khabarNom: "بيئةٌ آمنةٌ للتعلم", khabarBare: "بيئة" }
-];
+const CURATED_SENTENCE_BANK = [
+    { id: "in-01", tool: "إن", prompt: "____ الطالبَ مجتهدٌ في دروسه.", subjectBare: "الطالب", khabarBare: "مجتهد" },
+    { id: "in-02", tool: "إن", prompt: "____ الطالبةَ متميزةٌ في الإلقاء.", subjectBare: "الطالبة", khabarBare: "متميزة" },
+    { id: "in-03", tool: "إن", prompt: "____ الفريقَ متعاونٌ داخل الصف.", subjectBare: "الفريق", khabarBare: "متعاون" },
+    { id: "in-04", tool: "إن", prompt: "____ المعلمَ قدوةٌ في الانضباط.", subjectBare: "المعلم", khabarBare: "قدوة" },
+    { id: "in-05", tool: "إن", prompt: "____ المعلمةَ حريصةٌ على فهم الطلاب.", subjectBare: "المعلمة", khabarBare: "حريصة" },
+    { id: "in-06", tool: "إن", prompt: "____ المختبرَ مجهزٌ للتجارب العلمية.", subjectBare: "المختبر", khabarBare: "مجهز" },
+    { id: "in-07", tool: "إن", prompt: "____ المكتبةَ غنيةٌ بالمراجع المفيدة.", subjectBare: "المكتبة", khabarBare: "غنية" },
+    { id: "in-08", tool: "إن", prompt: "____ الإذاعةَ المدرسيةَ مؤثرةٌ في الطلاب.", subjectBare: "الإذاعة المدرسية", khabarBare: "مؤثرة" },
+    { id: "in-09", tool: "إن", prompt: "____ النشاطَ الرياضيَّ مهمٌ لصحة الطلاب.", subjectBare: "النشاط الرياضي", khabarBare: "مهم" },
+    { id: "in-10", tool: "إن", prompt: "____ الدرسَ واضحٌ بعد الشرح.", subjectBare: "الدرس", khabarBare: "واضح" },
+    { id: "in-11", tool: "إن", prompt: "____ التقريرَ منظمٌ ومرتبٌ.", subjectBare: "التقرير", khabarBare: "منظم" },
+    { id: "in-12", tool: "إن", prompt: "____ المشروعَ مفيدٌ لتنمية المهارات.", subjectBare: "المشروع", khabarBare: "مفيد" },
+    { id: "in-13", tool: "إن", prompt: "____ الحصةَ ممتعةٌ هذا اليوم.", subjectBare: "الحصة", khabarBare: "ممتعة" },
+    { id: "in-14", tool: "إن", prompt: "____ الجدولَ مناسبٌ لهذا الأسبوع.", subjectBare: "الجدول", khabarBare: "مناسب" },
+    { id: "in-15", tool: "إن", prompt: "____ الجوَّ مناسبٌ للرحلة العلمية.", subjectBare: "الجو", khabarBare: "مناسب" },
+    { id: "in-16", tool: "إن", prompt: "____ المسابقةَ فرصةٌ لإظهار المواهب.", subjectBare: "المسابقة", khabarBare: "فرصة" },
+    { id: "in-17", tool: "إن", prompt: "____ الفصلَ هادئٌ أثناء الامتحان.", subjectBare: "الفصل", khabarBare: "هادئ" },
+    { id: "in-18", tool: "إن", prompt: "____ الاجتهادَ طريقٌ للتفوق.", subjectBare: "الاجتهاد", khabarBare: "طريق" },
 
-const WISH_BANK = [
-    { acc: "الحصةَ", bare: "الحصة", khabarNom: "أطولُ قليلًا", khabarBare: "أطول" },
-    { acc: "الشرحَ", bare: "الشرح", khabarNom: "أوضحُ للجميع", khabarBare: "أوضح" },
-    { acc: "الواجبَ", bare: "الواجب", khabarNom: "أخفُّ هذا الأسبوع", khabarBare: "أخف" },
-    { acc: "وقتَ المراجعةِ", bare: "وقت المراجعة", khabarNom: "أوسعُ", khabarBare: "أوسع" },
-    { acc: "المختبرَ", bare: "المختبر", khabarNom: "متاحٌ بعد الدوام", khabarBare: "متاح" },
-    { acc: "المكتبةَ", bare: "المكتبة", khabarNom: "مفتوحةٌ حتى العصر", khabarBare: "مفتوحة" },
-    { acc: "الصفَّ", bare: "الصف", khabarNom: "أهدأُ أثناء الشرح", khabarBare: "أهدأ" },
-    { acc: "البرنامجَ", bare: "البرنامج", khabarNom: "أبسطُ للطلاب الجدد", khabarBare: "أبسط" },
-    { acc: "النشاطَ", bare: "النشاط", khabarNom: "أكثرُ تفاعلًا", khabarBare: "أكثر" },
-    { acc: "المسابقةَ", bare: "المسابقة", khabarNom: "أقربُ إلى واقع المنهج", khabarBare: "أقرب" },
-    { acc: "نتائجَ الاختبارِ", bare: "نتائج الاختبار", khabarNom: "أفضلُ هذا الفصل", khabarBare: "أفضل" },
-    { acc: "القاعةَ", bare: "القاعة", khabarNom: "أوسعُ للأنشطة", khabarBare: "أوسع" },
-    { acc: "جدولَ الاختباراتِ", bare: "جدول الاختبارات", khabarNom: "أكثرُ توازنًا", khabarBare: "أكثر" },
-    { acc: "المقاعدَ", bare: "المقاعد", khabarNom: "أريحُ للطلاب", khabarBare: "أريح" },
-    { acc: "الرحلةَ العلميةَ", bare: "الرحلة العلمية", khabarNom: "أقربُ موعدًا", khabarBare: "أقرب" },
-    { acc: "الأنشطةَ الفنيةَ", bare: "الأنشطة الفنية", khabarNom: "أكثرُ حضورًا", khabarBare: "أكثر" },
-    { acc: "جلسةَ النقاشِ", bare: "جلسة النقاش", khabarNom: "أطولُ", khabarBare: "أطول" },
-    { acc: "الخطةَ الدراسيةَ", bare: "الخطة الدراسية", khabarNom: "أوضحُ للطلاب", khabarBare: "أوضح" }
-];
+    { id: "an-01", tool: "أن", prompt: "يسعدني ____ الطالبَ مجتهدٌ في دروسه.", subjectBare: "الطالب", khabarBare: "مجتهد" },
+    { id: "an-02", tool: "أن", prompt: "من الرائع ____ الطالبةَ متألقةٌ في العروض.", subjectBare: "الطالبة", khabarBare: "متألقة" },
+    { id: "an-03", tool: "أن", prompt: "يسر المعلم ____ الصفَّ منظمٌ اليوم.", subjectBare: "الصف", khabarBare: "منظم" },
+    { id: "an-04", tool: "أن", prompt: "أؤكد ____ الخطةَ واضحةٌ للجميع.", subjectBare: "الخطة", khabarBare: "واضحة" },
+    { id: "an-05", tool: "أن", prompt: "لاحظت ____ الفريقَ متعاونٌ في المشروع.", subjectBare: "الفريق", khabarBare: "متعاون" },
+    { id: "an-06", tool: "أن", prompt: "من المهم ____ المختبرَ آمنٌ للتجارب.", subjectBare: "المختبر", khabarBare: "آمن" },
+    { id: "an-07", tool: "أن", prompt: "يسرني ____ المكتبةَ مفتوحةٌ بعد الدوام.", subjectBare: "المكتبة", khabarBare: "مفتوحة" },
+    { id: "an-08", tool: "أن", prompt: "يسعدنا ____ النشاطَ الثقافيَّ مفيدٌ للطلاب.", subjectBare: "النشاط الثقافي", khabarBare: "مفيد" },
+    { id: "an-09", tool: "أن", prompt: "أؤكد ____ التقريرَ دقيقٌ في معلوماته.", subjectBare: "التقرير", khabarBare: "دقيق" },
+    { id: "an-10", tool: "أن", prompt: "من الجميل ____ الحصةَ تفاعليةٌ هذا الأسبوع.", subjectBare: "الحصة", khabarBare: "تفاعلية" },
+    { id: "an-11", tool: "أن", prompt: "يسر المعلم ____ الواجبَ مناسبٌ لمستوى الصف.", subjectBare: "الواجب", khabarBare: "مناسب" },
+    { id: "an-12", tool: "أن", prompt: "من الرائع ____ الشرحَ مبسطٌ للطلاب.", subjectBare: "الشرح", khabarBare: "مبسط" },
+    { id: "an-13", tool: "أن", prompt: "يسرني ____ المسابقةَ عادلةٌ بين الفرق.", subjectBare: "المسابقة", khabarBare: "عادلة" },
+    { id: "an-14", tool: "أن", prompt: "من المهم ____ الجدولَ متوازنٌ هذا الفصل.", subjectBare: "الجدول", khabarBare: "متوازن" },
+    { id: "an-15", tool: "أن", prompt: "لاحظت ____ النتائجَ مرضيةٌ بعد التدريب.", subjectBare: "النتائج", khabarBare: "مرضية" },
+    { id: "an-16", tool: "أن", prompt: "يسعدنا ____ التعاونَ حاضرٌ بين الطلاب.", subjectBare: "التعاون", khabarBare: "حاضر" },
+    { id: "an-17", tool: "أن", prompt: "من الجميل ____ المشروعَ منظمٌ في خطواته.", subjectBare: "المشروع", khabarBare: "منظم" },
+    { id: "an-18", tool: "أن", prompt: "أؤكد ____ البرنامجَ ملائمٌ لأهداف المدرسة.", subjectBare: "البرنامج", khabarBare: "ملائم" },
 
-const HOPE_BANK = [
-    { acc: "الفريقَ", bare: "الفريق", khabarNom: "جاهزٌ للمسابقة", khabarBare: "جاهز" },
-    { acc: "الطلابَ", bare: "الطلاب", khabarNom: "ملتزمون بالخطة", khabarBare: "ملتزمون" },
-    { acc: "النتائجَ", bare: "النتائج", khabarNom: "مرضيةٌ", khabarBare: "مرضية" },
-    { acc: "المشروعَ", bare: "المشروع", khabarNom: "مكتملٌ", khabarBare: "مكتمل" },
-    { acc: "الطقسَ", bare: "الطقس", khabarNom: "مناسبٌ للرحلة", khabarBare: "مناسب" },
-    { acc: "الشرحَ", bare: "الشرح", khabarNom: "مفيدٌ للجميع", khabarBare: "مفيد" },
-    { acc: "القاعةَ", bare: "القاعة", khabarNom: "مهيأةٌ للعرض", khabarBare: "مهيأة" },
-    { acc: "الإذاعةَ المدرسيةَ", bare: "الإذاعة المدرسية", khabarNom: "مؤثرةٌ في الطلاب", khabarBare: "مؤثرة" },
-    { acc: "المختبرَ", bare: "المختبر", khabarNom: "آمنٌ للتجارب", khabarBare: "آمن" },
-    { acc: "الواجبَ", bare: "الواجب", khabarNom: "واضحٌ في التعليمات", khabarBare: "واضح" },
-    { acc: "التقريرَ", bare: "التقرير", khabarNom: "جاهزٌ للتسليم", khabarBare: "جاهز" },
-    { acc: "الطلابَ الجددَ", bare: "الطلاب الجدد", khabarNom: "مندمجون بسرعة", khabarBare: "مندمجون" },
-    { acc: "المعرضَ", bare: "المعرض", khabarNom: "منظمٌ", khabarBare: "منظم" },
-    { acc: "الخطةَ", bare: "الخطة", khabarNom: "قابلةٌ للتنفيذ", khabarBare: "قابلة" },
-    { acc: "البرنامجَ", bare: "البرنامج", khabarNom: "ملائمٌ لقدرات الطلاب", khabarBare: "ملائم" },
-    { acc: "الفصلَ", bare: "الفصل", khabarNom: "هادئٌ أثناء الشرح", khabarBare: "هادئ" },
-    { acc: "الأنشطةَ", bare: "الأنشطة", khabarNom: "متنوعةٌ", khabarBare: "متنوعة" },
-    { acc: "الحافلةَ", bare: "الحافلة", khabarNom: "ملتزمةٌ بالموعد", khabarBare: "ملتزمة" }
-];
+    { id: "ka-01", tool: "كأن", prompt: "____ الطالبَ نجمٌ في الاجتهاد.", subjectBare: "الطالب", khabarBare: "نجم" },
+    { id: "ka-02", tool: "كأن", prompt: "____ الطالبةَ شعلةُ نشاطٍ في الصف.", subjectBare: "الطالبة", khabarBare: "شعلة" },
+    { id: "ka-03", tool: "كأن", prompt: "____ الفريقَ خليةُ نحلٍ أثناء العمل.", subjectBare: "الفريق", khabarBare: "خلية" },
+    { id: "ka-04", tool: "كأن", prompt: "____ المعلمَ أبٌ حانٍ على طلابه.", subjectBare: "المعلم", khabarBare: "أب" },
+    { id: "ka-05", tool: "كأن", prompt: "____ المعلمةَ بوصلةُ نجاحٍ للصف.", subjectBare: "المعلمة", khabarBare: "بوصلة" },
+    { id: "ka-06", tool: "كأن", prompt: "____ المختبرَ ورشةُ اكتشافٍ ممتعةٍ.", subjectBare: "المختبر", khabarBare: "ورشة" },
+    { id: "ka-07", tool: "كأن", prompt: "____ المكتبةَ بحرُ معرفةٍ واسعٌ.", subjectBare: "المكتبة", khabarBare: "بحر" },
+    { id: "ka-08", tool: "كأن", prompt: "____ الإذاعةَ المدرسيةَ صوتُ المدرسةِ اليومي.", subjectBare: "الإذاعة المدرسية", khabarBare: "صوت" },
+    { id: "ka-09", tool: "كأن", prompt: "____ النشاطَ الفنيَّ لوحةٌ من الإبداع.", subjectBare: "النشاط الفني", khabarBare: "لوحة" },
+    { id: "ka-10", tool: "كأن", prompt: "____ الدرسَ مفتاحُ فهمٍ للموضوع.", subjectBare: "الدرس", khabarBare: "مفتاح" },
+    { id: "ka-11", tool: "كأن", prompt: "____ المشروعَ جسرٌ نحو الابتكار.", subjectBare: "المشروع", khabarBare: "جسر" },
+    { id: "ka-12", tool: "كأن", prompt: "____ العرضَ قصةُ نجاحٍ أمام الحضور.", subjectBare: "العرض", khabarBare: "قصة" },
+    { id: "ka-13", tool: "كأن", prompt: "____ المسابقةَ ميدانُ تحدٍّ جميلٍ.", subjectBare: "المسابقة", khabarBare: "ميدان" },
+    { id: "ka-14", tool: "كأن", prompt: "____ الفصلَ بيتٌ ثانٍ للطلاب.", subjectBare: "الفصل", khabarBare: "بيت" },
+    { id: "ka-15", tool: "كأن", prompt: "____ التعاونَ جناحا نجاحٍ للفريق.", subjectBare: "التعاون", khabarBare: "جناحا" },
+    { id: "ka-16", tool: "كأن", prompt: "____ الاجتهادَ سلمٌ نحو التفوق.", subjectBare: "الاجتهاد", khabarBare: "سلم" },
+    { id: "ka-17", tool: "كأن", prompt: "____ الحصةَ رحلةُ تعلمٍ ممتعةٍ.", subjectBare: "الحصة", khabarBare: "رحلة" },
+    { id: "ka-18", tool: "كأن", prompt: "____ البرنامجَ خريطةُ طريقٍ واضحةٌ.", subjectBare: "البرنامج", khabarBare: "خريطة" },
 
-const SIMILE_SCENES = [
-    { acc: "الطالبَ", bare: "الطالب", simileNom: "نجمٌ في الاجتهاد", simileBare: "نجم" },
-    { acc: "الطالبةَ", bare: "الطالبة", simileNom: "شعلةُ نشاطٍ", simileBare: "شعلة" },
-    { acc: "الفريقَ", bare: "الفريق", simileNom: "خليةُ نحلٍ", simileBare: "خلية" },
-    { acc: "المعلمَ", bare: "المعلم", simileNom: "قائدٌ حكيمٌ", simileBare: "قائد" },
-    { acc: "المعلمةَ", bare: "المعلمة", simileNom: "بوصلةُ نجاحٍ", simileBare: "بوصلة" },
-    { acc: "المختبرَ", bare: "المختبر", simileNom: "ورشةُ ابتكارٍ", simileBare: "ورشة" },
-    { acc: "المكتبةَ", bare: "المكتبة", simileNom: "كنزٌ معرفيٌ", simileBare: "كنز" },
-    { acc: "الإذاعةَ المدرسيةَ", bare: "الإذاعة المدرسية", simileNom: "صوتُ المدرسة", simileBare: "صوت" },
-    { acc: "القاعةَ", bare: "القاعة", simileNom: "خليةُ تعلمٍ", simileBare: "خلية" },
-    { acc: "البرنامجَ", bare: "البرنامج", simileNom: "خريطةُ طريقٍ", simileBare: "خريطة" },
-    { acc: "المشروعَ", bare: "المشروع", simileNom: "جسرٌ للمستقبل", simileBare: "جسر" },
-    { acc: "العرضَ", bare: "العرض", simileNom: "لوحةٌ فنيةٌ", simileBare: "لوحة" },
-    { acc: "النشاطَ", bare: "النشاط", simileNom: "محركُ حماسٍ", simileBare: "محرك" },
-    { acc: "الدرسَ", bare: "الدرس", simileNom: "مفتاحُ فهمٍ", simileBare: "مفتاح" },
-    { acc: "المسابقةَ", bare: "المسابقة", simileNom: "ميدانُ تميزٍ", simileBare: "ميدان" }
-];
+    { id: "lk-01", tool: "لكن", prompt: "الطريق طويلٌ، ____ الحماسَ كبيرٌ بين الطلاب.", subjectBare: "الحماس", khabarBare: "كبير" },
+    { id: "lk-02", tool: "لكن", prompt: "الوقت ضيقٌ، ____ الفريقَ مستعدٌ للمسابقة.", subjectBare: "الفريق", khabarBare: "مستعد" },
+    { id: "lk-03", tool: "لكن", prompt: "المنهج كثيفٌ، ____ الشرحَ واضحٌ للجميع.", subjectBare: "الشرح", khabarBare: "واضح" },
+    { id: "lk-04", tool: "لكن", prompt: "الأسئلة كثيرةٌ، ____ الطالبَ هادئٌ وواثقٌ.", subjectBare: "الطالب", khabarBare: "هادئ" },
+    { id: "lk-05", tool: "لكن", prompt: "الطقس متقلبٌ، ____ الرحلةَ قائمةٌ هذا الأسبوع.", subjectBare: "الرحلة", khabarBare: "قائمة" },
+    { id: "lk-06", tool: "لكن", prompt: "المهمة صعبةٌ، ____ التعاونَ حاضرٌ في المجموعة.", subjectBare: "التعاون", khabarBare: "حاضر" },
+    { id: "lk-07", tool: "لكن", prompt: "البداية كانت بطيئةً، ____ التقدمَ ملحوظٌ الآن.", subjectBare: "التقدم", khabarBare: "ملحوظ" },
+    { id: "lk-08", tool: "لكن", prompt: "الامتحان قريبٌ، ____ الخطةَ منظمةٌ للمراجعة.", subjectBare: "الخطة", khabarBare: "منظمة" },
+    { id: "lk-09", tool: "لكن", prompt: "القاعة مزدحمةٌ، ____ العرضَ مرتبٌ وجميلٌ.", subjectBare: "العرض", khabarBare: "مرتب" },
+    { id: "lk-10", tool: "لكن", prompt: "التحدي كبيرٌ، ____ المعلمةَ داعمةٌ للطلاب.", subjectBare: "المعلمة", khabarBare: "داعمة" },
+    { id: "lk-11", tool: "لكن", prompt: "العمل كثيرٌ، ____ النتائجَ مبشرةٌ هذا الفصل.", subjectBare: "النتائج", khabarBare: "مبشرة" },
+    { id: "lk-12", tool: "لكن", prompt: "الوقت قصيرٌ، ____ الواجبَ واضحٌ وسهلٌ.", subjectBare: "الواجب", khabarBare: "واضح" },
+    { id: "lk-13", tool: "لكن", prompt: "المشروع طويلٌ، ____ الإنجازَ مستمرٌ كل يوم.", subjectBare: "الإنجاز", khabarBare: "مستمر" },
+    { id: "lk-14", tool: "لكن", prompt: "الدرس جديدٌ، ____ الفكرةَ مفهومةٌ بعد الشرح.", subjectBare: "الفكرة", khabarBare: "مفهومة" },
+    { id: "lk-15", tool: "لكن", prompt: "النشاط يحتاج جهدًا، ____ الطلابَ متحمسون للمشاركة.", subjectBare: "الطلاب", khabarBare: "متحمسون" },
+    { id: "lk-16", tool: "لكن", prompt: "الطريق ليس سهلًا، ____ الاجتهادَ موجودٌ في الصف.", subjectBare: "الاجتهاد", khabarBare: "موجود" },
+    { id: "lk-17", tool: "لكن", prompt: "التجربة دقيقةٌ، ____ المختبرَ آمنٌ ومنظمٌ.", subjectBare: "المختبر", khabarBare: "آمن" },
+    { id: "lk-18", tool: "لكن", prompt: "المسابقة قويةٌ، ____ الفريقَ واثقٌ من أدائه.", subjectBare: "الفريق", khabarBare: "واثق" },
 
-const CERTAINTY_TAILS = ["حقًا", "بلا شك", "فعلًا", "بصورة واضحة", "في هذا الفصل"];
-const WISH_TAILS = ["في هذا الفصل", "خلال الفترة القادمة", "قبل الاختبارات", "عند بداية الفصل القادم", "بشكل مستمر"];
-const HOPE_TAILS = ["هذا الأسبوع", "قريبًا", "في الفترة القادمة", "خلال هذا الفصل", "في الأيام المقبلة"];
-const CONTRAST_PREFIXES = [
-    "المهمة صعبة،",
-    "الوقت محدود،",
-    "الطريق ليس سهلًا،",
-    "التحدي كبير،",
-    "المنهج كثيف،",
-    "الاستعداد يحتاج جهدًا،"
-];
-const AN_STARTERS = [
-    "يسرني",
-    "يسعدنا",
-    "من الرائع",
-    "من الجميل",
-    "من المهم",
-    "لاحظت",
-    "أؤكد",
-    "يسر المعلم"
-];
-const SIMILE_TAILS = [
-    "وقت الحصة",
-    "أثناء النشاط",
-    "في يوم العرض",
-    "عند العمل الجماعي",
-    "في أجواء المسابقة"
+    { id: "ly-01", tool: "ليت", prompt: "____ الحصةَ أطولُ قليلًا.", subjectBare: "الحصة", khabarBare: "أطول" },
+    { id: "ly-02", tool: "ليت", prompt: "____ وقتَ المراجعةِ أوسعُ قبل الاختبار.", subjectBare: "وقت المراجعة", khabarBare: "أوسع" },
+    { id: "ly-03", tool: "ليت", prompt: "____ الواجبَ أخفُّ هذا الأسبوع.", subjectBare: "الواجب", khabarBare: "أخف" },
+    { id: "ly-04", tool: "ليت", prompt: "____ الشرحَ أوضحُ للجميع.", subjectBare: "الشرح", khabarBare: "أوضح" },
+    { id: "ly-05", tool: "ليت", prompt: "____ المختبرَ متاحٌ بعد الدوام.", subjectBare: "المختبر", khabarBare: "متاح" },
+    { id: "ly-06", tool: "ليت", prompt: "____ المكتبةَ مفتوحةٌ حتى العصر.", subjectBare: "المكتبة", khabarBare: "مفتوحة" },
+    { id: "ly-07", tool: "ليت", prompt: "____ الصفَّ أهدأُ أثناء الشرح.", subjectBare: "الصف", khabarBare: "أهدأ" },
+    { id: "ly-08", tool: "ليت", prompt: "____ البرنامجَ أبسطُ للطلاب الجدد.", subjectBare: "البرنامج", khabarBare: "أبسط" },
+    { id: "ly-09", tool: "ليت", prompt: "____ النشاطَ أكثرُ تفاعلًا بين الفرق.", subjectBare: "النشاط", khabarBare: "أكثر" },
+    { id: "ly-10", tool: "ليت", prompt: "____ المسابقةَ أقربُ إلى واقع المنهج.", subjectBare: "المسابقة", khabarBare: "أقرب" },
+    { id: "ly-11", tool: "ليت", prompt: "____ نتائجَ الاختبارِ أفضلُ هذا الفصل.", subjectBare: "نتائج الاختبار", khabarBare: "أفضل" },
+    { id: "ly-12", tool: "ليت", prompt: "____ القاعةَ أوسعُ للأنشطة.", subjectBare: "القاعة", khabarBare: "أوسع" },
+    { id: "ly-13", tool: "ليت", prompt: "____ جدولَ الاختباراتِ أكثرُ توازنًا.", subjectBare: "جدول الاختبارات", khabarBare: "أكثر" },
+    { id: "ly-14", tool: "ليت", prompt: "____ المقاعدَ أريحُ للطلاب.", subjectBare: "المقاعد", khabarBare: "أريح" },
+    { id: "ly-15", tool: "ليت", prompt: "____ الرحلةَ العلميةَ أقربُ موعدًا.", subjectBare: "الرحلة العلمية", khabarBare: "أقرب" },
+    { id: "ly-16", tool: "ليت", prompt: "____ الأنشطةَ الفنيةَ أكثرُ حضورًا.", subjectBare: "الأنشطة الفنية", khabarBare: "أكثر" },
+    { id: "ly-17", tool: "ليت", prompt: "____ جلسةَ النقاشِ أطولُ من المعتاد.", subjectBare: "جلسة النقاش", khabarBare: "أطول" },
+    { id: "ly-18", tool: "ليت", prompt: "____ الخطةَ الدراسيةَ أوضحُ للطلاب.", subjectBare: "الخطة الدراسية", khabarBare: "أوضح" },
+
+    { id: "la-01", tool: "لعل", prompt: "____ الفريقَ جاهزٌ للمسابقة.", subjectBare: "الفريق", khabarBare: "جاهز" },
+    { id: "la-02", tool: "لعل", prompt: "____ الطلابَ ملتزمون بالخطة.", subjectBare: "الطلاب", khabarBare: "ملتزمون" },
+    { id: "la-03", tool: "لعل", prompt: "____ النتائجَ مرضيةٌ هذا الأسبوع.", subjectBare: "النتائج", khabarBare: "مرضية" },
+    { id: "la-04", tool: "لعل", prompt: "____ المشروعَ مكتملٌ قريبًا.", subjectBare: "المشروع", khabarBare: "مكتمل" },
+    { id: "la-05", tool: "لعل", prompt: "____ الطقسَ مناسبٌ للرحلة.", subjectBare: "الطقس", khabarBare: "مناسب" },
+    { id: "la-06", tool: "لعل", prompt: "____ الشرحَ مفيدٌ للجميع.", subjectBare: "الشرح", khabarBare: "مفيد" },
+    { id: "la-07", tool: "لعل", prompt: "____ القاعةَ مهيأةٌ للعرض.", subjectBare: "القاعة", khabarBare: "مهيأة" },
+    { id: "la-08", tool: "لعل", prompt: "____ الإذاعةَ المدرسيةَ مؤثرةٌ في الطلاب.", subjectBare: "الإذاعة المدرسية", khabarBare: "مؤثرة" },
+    { id: "la-09", tool: "لعل", prompt: "____ المختبرَ آمنٌ للتجارب.", subjectBare: "المختبر", khabarBare: "آمن" },
+    { id: "la-10", tool: "لعل", prompt: "____ الواجبَ واضحٌ في التعليمات.", subjectBare: "الواجب", khabarBare: "واضح" },
+    { id: "la-11", tool: "لعل", prompt: "____ التقريرَ جاهزٌ للتسليم.", subjectBare: "التقرير", khabarBare: "جاهز" },
+    { id: "la-12", tool: "لعل", prompt: "____ الطلابَ الجددَ مندمجون بسرعة.", subjectBare: "الطلاب الجدد", khabarBare: "مندمجون" },
+    { id: "la-13", tool: "لعل", prompt: "____ المعرضَ منظمٌ هذا العام.", subjectBare: "المعرض", khabarBare: "منظم" },
+    { id: "la-14", tool: "لعل", prompt: "____ الخطةَ قابلةٌ للتنفيذ.", subjectBare: "الخطة", khabarBare: "قابلة" },
+    { id: "la-15", tool: "لعل", prompt: "____ البرنامجَ ملائمٌ لقدرات الطلاب.", subjectBare: "البرنامج", khabarBare: "ملائم" },
+    { id: "la-16", tool: "لعل", prompt: "____ الفصلَ هادئٌ أثناء الشرح.", subjectBare: "الفصل", khabarBare: "هادئ" },
+    { id: "la-17", tool: "لعل", prompt: "____ الأنشطةَ متنوعةٌ هذا الشهر.", subjectBare: "الأنشطة", khabarBare: "متنوعة" },
+    { id: "la-18", tool: "لعل", prompt: "____ الحافلةَ ملتزمةٌ بالموعد.", subjectBare: "الحافلة", khabarBare: "ملتزمة" }
 ];
 
 function hashString(value) {
@@ -165,23 +168,22 @@ function createSeededRng(seedText) {
     return mulberry32(hashString(seedText));
 }
 
-function getOrCreateUserSeed() {
-    try {
-        const fromStorage = window.localStorage.getItem(USER_SEED_KEY);
-        if (fromStorage) {
-            return fromStorage;
-        }
+function createSessionSeed() {
+    let cryptoPart = "";
 
-        const randomPart = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
-        window.localStorage.setItem(USER_SEED_KEY, randomPart);
-        return randomPart;
+    try {
+        const bytes = new Uint32Array(2);
+        window.crypto.getRandomValues(bytes);
+        cryptoPart = `${bytes[0].toString(36)}-${bytes[1].toString(36)}`;
     } catch (error) {
-        return `${Date.now().toString(36)}-fallback-seed`;
+        cryptoPart = Math.random().toString(36).slice(2, 12);
     }
+
+    return `${Date.now().toString(36)}-${cryptoPart}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
-const USER_SEED = getOrCreateUserSeed();
-const userRng = createSeededRng(USER_SEED);
+const SESSION_SEED = createSessionSeed();
+const sessionRng = createSeededRng(SESSION_SEED);
 
 function pickRandom(items, rng) {
     return items[Math.floor(rng() * items.length)];
@@ -210,56 +212,6 @@ function uniqueOptions(correct, distractors, rng) {
 function buildToolOptions(correctTool, rng) {
     const others = TOOL_POOL.filter((tool) => tool !== correctTool);
     return shuffle([correctTool, ...shuffle(others, rng).slice(0, 3)], rng);
-}
-
-function buildSentence(tool, rng) {
-    let prompt;
-    let parseKhabar;
-    let subject;
-
-    if (tool === "إن") {
-        const statement = pickRandom(STATEMENT_BANK, rng);
-        const tail = pickRandom(CERTAINTY_TAILS, rng);
-        prompt = `____ ${statement.acc} ${statement.khabarNom} ${tail}.`;
-        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
-        subject = { acc: statement.acc, bare: statement.bare };
-    } else if (tool === "أن") {
-        const statement = pickRandom(STATEMENT_BANK, rng);
-        const starter = pickRandom(AN_STARTERS, rng);
-        prompt = `${starter} ____ ${statement.acc} ${statement.khabarNom}.`;
-        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
-        subject = { acc: statement.acc, bare: statement.bare };
-    } else if (tool === "كأن") {
-        const simile = pickRandom(SIMILE_SCENES, rng);
-        const tail = pickRandom(SIMILE_TAILS, rng);
-        prompt = `____ ${simile.acc} ${simile.simileNom} ${tail}.`;
-        parseKhabar = { nom: simile.simileNom, bare: simile.simileBare };
-        subject = { acc: simile.acc, bare: simile.bare };
-    } else if (tool === "لكن") {
-        const statement = pickRandom(STATEMENT_BANK, rng);
-        const prefix = pickRandom(CONTRAST_PREFIXES, rng);
-        prompt = `${prefix} ____ ${statement.acc} ${statement.khabarNom}.`;
-        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
-        subject = { acc: statement.acc, bare: statement.bare };
-    } else if (tool === "ليت") {
-        const statement = pickRandom(WISH_BANK, rng);
-        const tail = pickRandom(WISH_TAILS, rng);
-        prompt = `____ ${statement.acc} ${statement.khabarNom} ${tail}.`;
-        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
-        subject = { acc: statement.acc, bare: statement.bare };
-    } else {
-        const statement = pickRandom(HOPE_BANK, rng);
-        const tail = pickRandom(HOPE_TAILS, rng);
-        prompt = `____ ${statement.acc} ${statement.khabarNom} ${tail}.`;
-        parseKhabar = { nom: statement.khabarNom, bare: statement.khabarBare };
-        subject = { acc: statement.acc, bare: statement.bare };
-    }
-
-    return {
-        prompt,
-        parseKhabar,
-        subject
-    };
 }
 
 function buildParseQuestion(tool, sentenceWithBlank, name, khabar, rng) {
@@ -299,75 +251,90 @@ function buildParseQuestion(tool, sentenceWithBlank, name, khabar, rng) {
     };
 }
 
-function buildSingleChallenge(tool, rng, seen, maxAttempts = 120) {
-    let attempts = 0;
+function buildChallengeFromSentence(entry, rng) {
+    const mission = pickRandom(MISSION_BANK, rng);
 
-    while (attempts < maxAttempts) {
-        attempts += 1;
-        const mission = pickRandom(MISSION_BANK, rng);
-        const sentence = buildSentence(tool, rng);
+    return {
+        missionTitle: mission.title,
+        missionText: mission.text,
+        toolQuestion: {
+            prompt: entry.prompt,
+            correct: entry.tool,
+            options: buildToolOptions(entry.tool, rng),
+            explain: TOOL_EXPLAIN[entry.tool]
+        },
+        parseQuestion: buildParseQuestion(
+            entry.tool,
+            entry.prompt,
+            { bare: entry.subjectBare },
+            { bare: entry.khabarBare },
+            rng
+        )
+    };
+}
 
-        const toolQuestion = {
-            prompt: sentence.prompt,
-            correct: tool,
-            options: buildToolOptions(tool, rng),
-            explain: TOOL_EXPLAIN[tool]
-        };
+function computeSelectionSignature(entries) {
+    return entries
+        .map((entry) => entry.id)
+        .sort()
+        .join("|");
+}
 
-        const parseQuestion = buildParseQuestion(tool, sentence.prompt, sentence.subject, sentence.parseKhabar, rng);
-        const key = `${toolQuestion.prompt}|${parseQuestion.prompt}`;
+function selectBalancedSentences(count, rng) {
+    const target = Math.min(count, CURATED_SENTENCE_BANK.length);
+    const buckets = {};
 
-        if (seen.has(key)) {
-            continue;
-        }
+    TOOL_POOL.forEach((tool) => {
+        buckets[tool] = shuffle(CURATED_SENTENCE_BANK.filter((entry) => entry.tool === tool), rng);
+    });
 
-        seen.add(key);
-        return {
-            missionTitle: mission.title,
-            missionText: mission.text,
-            toolQuestion,
-            parseQuestion
-        };
+    const base = Math.floor(target / TOOL_POOL.length);
+    const remainder = target % TOOL_POOL.length;
+    const remainderTools = shuffle([...TOOL_POOL], rng).slice(0, remainder);
+    const selected = [];
+
+    TOOL_POOL.forEach((tool) => {
+        const quota = base + (remainderTools.includes(tool) ? 1 : 0);
+        selected.push(...buckets[tool].splice(0, quota));
+    });
+
+    if (selected.length < target) {
+        const leftovers = shuffle(TOOL_POOL.flatMap((tool) => buckets[tool]), rng);
+        selected.push(...leftovers.slice(0, target - selected.length));
     }
 
-    return null;
+    return shuffle(selected, rng);
 }
 
 function generateChallengePool(count, rng) {
-    const pool = [];
-    const seen = new Set();
+    let selected = selectBalancedSentences(count, rng);
 
-    const basePerTool = Math.floor(count / TOOL_POOL.length);
-    const remainder = count % TOOL_POOL.length;
-    const remainderOrder = shuffle([...TOOL_POOL], rng);
-    const quotas = TOOL_POOL.map((tool) => ({
-        tool,
-        quota: basePerTool + (remainderOrder.slice(0, remainder).includes(tool) ? 1 : 0)
-    }));
+    try {
+        const previousSignature = window.localStorage.getItem(LAST_SELECTION_KEY);
+        let signature = computeSelectionSignature(selected);
+        let attempts = 0;
 
-    quotas.forEach(({ tool, quota }) => {
-        for (let i = 0; i < quota; i += 1) {
-            const challenge = buildSingleChallenge(tool, rng, seen);
-            if (challenge) {
-                pool.push(challenge);
-            }
+        while (
+            previousSignature &&
+            signature === previousSignature &&
+            attempts < 6 &&
+            CURATED_SENTENCE_BANK.length > selected.length
+        ) {
+            const retryRng = createSeededRng(`${createSessionSeed()}-retry-${attempts}`);
+            selected = selectBalancedSentences(count, retryRng);
+            signature = computeSelectionSignature(selected);
+            attempts += 1;
         }
-    });
 
-    let safetyAttempts = 0;
-    while (pool.length < count && safetyAttempts < count * 40) {
-        safetyAttempts += 1;
-        const tool = pickRandom(TOOL_POOL, rng);
-        const challenge = buildSingleChallenge(tool, rng, seen, 30);
-        if (challenge) {
-            pool.push(challenge);
-        }
+        window.localStorage.setItem(LAST_SELECTION_KEY, signature);
+    } catch (error) {
+        // Ignore storage issues and continue with current random selection.
     }
 
-    return shuffle(pool, rng);
+    return selected.map((entry) => buildChallengeFromSentence(entry, rng));
 }
 
-const CHALLENGES = generateChallengePool(GENERATED_CHALLENGE_COUNT, userRng);
+const CHALLENGES = generateChallengePool(GENERATED_CHALLENGE_COUNT, sessionRng);
 
 const rankTable = [
     { min: 0, rank: "متدرّب نحوي", note: "بداية جميلة، ركّز على معنى كل أداة." },
@@ -421,9 +388,6 @@ function buildDiverseChallengeOrder(rng) {
 
     CHALLENGES.forEach((challenge, index) => {
         const tool = challenge.toolQuestion.correct;
-        if (!buckets[tool]) {
-            buckets[tool] = [];
-        }
         buckets[tool].push(index);
     });
 
@@ -439,7 +403,7 @@ function buildDiverseChallengeOrder(rng) {
         hasRemaining = false;
         toolOrder.forEach((tool) => {
             const bucket = buckets[tool];
-            if (bucket && bucket.length > 0) {
+            if (bucket.length > 0) {
                 order.push(bucket.pop());
                 hasRemaining = true;
             }
@@ -450,7 +414,7 @@ function buildDiverseChallengeOrder(rng) {
 }
 
 function resetChallengeOrder() {
-    state.challengeOrder = buildDiverseChallengeOrder(userRng);
+    state.challengeOrder = buildDiverseChallengeOrder(sessionRng);
     state.challengeCursor = 0;
 }
 
@@ -484,7 +448,7 @@ function renderQuestion() {
     el.questionText.textContent = question.prompt;
     el.optionsArea.innerHTML = "";
 
-    const options = shuffle(question.options, userRng);
+    const options = shuffle(question.options, sessionRng);
     options.forEach((option, index) => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
@@ -565,11 +529,11 @@ function launchConfetti() {
     for (let i = 0; i < pieces; i += 1) {
         const piece = document.createElement("span");
         piece.className = "confetti";
-        piece.style.left = `${userRng() * 100}vw`;
-        piece.style.backgroundColor = colors[Math.floor(userRng() * colors.length)];
-        piece.style.animationDuration = `${2 + userRng() * 1.8}s`;
-        piece.style.opacity = String(0.8 + userRng() * 0.2);
-        piece.style.transform = `translateY(0) rotate(${userRng() * 200}deg)`;
+        piece.style.left = `${sessionRng() * 100}vw`;
+        piece.style.backgroundColor = colors[Math.floor(sessionRng() * colors.length)];
+        piece.style.animationDuration = `${2 + sessionRng() * 1.8}s`;
+        piece.style.opacity = String(0.8 + sessionRng() * 0.2);
+        piece.style.transform = `translateY(0) rotate(${sessionRng() * 200}deg)`;
         document.body.appendChild(piece);
         window.setTimeout(() => piece.remove(), 4200);
     }
